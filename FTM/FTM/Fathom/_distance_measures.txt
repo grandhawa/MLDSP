@@ -1,0 +1,50 @@
+A summary of some of the distance & dissimilarity measures available
+in the Fathom Toolbox for Matlab (David L. Jones, Jul-2013):
+
+Average distance
+Bray-Curtis dissimilarity
+Binomial deviance dissimilarity (scale-invariant)
+Binomial deviance dissimilarity (unscaled)
+Canberra metric
+Canberra dissimilarity
+Chi-square metric
+Chi-square distance
+Chao's abundance-based Jaccard dissimilarity
+Bias-corrected version of Chao's
+Chao's abundance-based Sorensen dissimilarity
+Orloci's Chord distance
+Coefficient of Divergence + exclude double-zeros
+Pearson Correlation dissimilarity
+Spearman Rank Correlation dissimilarity
+Chao's dissimilarity for count data
+Czekanowski distance + exclude double-zeros
+Euclidean distance
+Euclidean distance + exclude double-zeros
+Euclidean distance squared
+Euclidean similarity
+Geodesic metric
+Gower's metric
+Gower's metric + exclude double-zero
+Gower's metric + exclude double-zeros (log2 transform)
+Gower's metric + exclude double-zeros (log10 transform)
+Hellinger dissimilarity
+Whittaker's Index of Association dissimilarity
+Jaccard dissimilarity
+Kulczynski quantitative dissimilarity
+Manhattan (City-block) metric
+Manhattan (City-block) metric + exclude double-zeros
+Minkowski's metric
+Morisita's Index of Overlap for count data
+Morisita-Horn dissimilarity
+Ochiai quantitative dissimilarity
+Sorensen's dissimilarity
+Watson's nonmetric coefficient dissimilarity
+Simple Matching dissimilarity
+Rogers & Tanimoto dissimilarity
+Sokal & Sneath dissimilarity
+Jaccard dissimilarity variant
+Russel & Rao dissimilarity
+Binary Kulczynski dissimilarity
+Binary Ochiai dissimilarity
+Faith dissimilarity
+Species Profiles distance

@@ -1,0 +1,162 @@
+README for pdfcrop 2008/09/12 v1.14
+
+TABLE OF CONTENTS
+=================
+A. Description
+B. Copyright, Disclaimer, License
+C. Files
+D. Requirements
+E. Installation
+F. User Interface
+G. Author
+H. Acknowledgement
+I. Questions, Suggested Improvements
+J. Known Problems
+K. History
+L. ToDo
+
+A. DESCRIPTION
+==============
+PDFCROP takes a PDF file as input, calculates the BoundingBox
+for each page by the help of ghostscript and generates a output
+PDF file with removed margins.
+
+B. COPYRIGHT, DISCLAIMER, LICENSE
+=================================
+Copyright (C) 2002, 2004, 2005, 2008 Heiko Oberdiek.
+
+This program may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either version 1.2
+of this license or (at your option) any later version.
+The latest version of this license is in
+  http://www.latex-project.org/lppl.txt
+and version 1.2 or later is part of all distributions of LaTeX
+version 1999/12/01 or later.
+
+C. FILES
+========
+The project `pdfcrop' consists of two files:
+pdfcrop.pl: This perl script is the main program. The extension
+            `.pl' may be omitted.
+README:     Documentation, the file you are reading.
+
+Following temporary files are produced if `pdfcrop' is invoked:
+tmp-pdfcrop-*.tex:  input file for pdfTeX
+tmp-pdfcrop-*.log:  log file of pdfTeX run
+tmp-pdfcrop-*.pdf:  result after pdfTeX run
+
+D. REQUIREMENTS
+===============
+* Perl5 (version 5 of the perl interpreter)
+* Ghostscript (>= 8.0 if PDF file contains rotated pages)
+* pdfTeX, version >= 1.0 (because of page selecting and \pdfximage syntax)
+
+E. INSTALLATION
+===============
+
+1. Perl script `pdfcrop.pl':
+
+   TDS 1.1 location:
+   * texmf/scripts/pdfcrop/pdfcrop.pl
+   * and a directory that is part of PATH contains a wrapper script
+     or link with name "pdfcrop".
+
+   Unix
+   * It is allowed to rename `pdfcrop.pl' to `pdfcrop':
+       mv pdfcrop.pl pdfcrop
+   * Ensure that the execute permission is set:
+       chmod +x pdfcrop
+   * Move the file to a directory where the shell can find it
+     (environment variable PATH, e.g. /usr/local/bin/).
+
+   Dos/Windows/(OS2)
+   * See requirements. I do not expect that the perl script
+     run under DOS or Windows. With cygwin it can work however.
+
+2. Documentation `README':
+
+   Copy it to an appropriate place, for example
+   `/usr/local/share/doc/pdfcrop/README'.
+   I is allowed to rename it to `pdfcrop.txt'.
+
+   TDS location:
+     somewhere below texmf/doc/... (?)
+   Examples:
+     TDS:doc/support/pdfcrop/README
+     TDS:doc/scripts/pdfcrop/README
+     TDS:doc/scripts/pdfcrop.txt
+
+F. USER INTERFACE
+=================
+* ToDo: User manual
+* Online help:
+    pdfcrop --help
+* Ghostscript's calculation of the bounding box is faster,
+  if --resolution 72 is used instead of ghostscript's implicite
+  default setting of 4000 DPI (hint from Ionut Georgescu).
+  Of course the calculation with higher resolution settings are
+  more accurate.
+
+G. AUTHOR
+=========
+Heiko Oberdiek
+Email: oberdiek at uni-freiburg.de
+
+H. ACKNOWLEDGEMENT
+==================
+Anthony Williams
+Scott Pakin <pakin at uiuc.edu>
+Ionut Georgescu
+Yves J\"ager
+R (Chandra) Chandrasekhar
+Christian Stapfer
+
+I. QUESTIONS, SUGGESTED IMPROVEMENTS
+====================================
+If you have questions, problems with `pdfcrop', error reports,
+if you have improvements or want to have additional features,
+please send them to the author.
+
+My environment for developing and testing:
+* linux, SuSE 9.0
+* perl v5.8.1
+* pdfTeX 3.141592-1.40.x
+* Ghostscript 8.x
+
+J. KNOWN PROBLEMS
+=================
+* pdfcrop relies on Ghostscript for the calculation of the
+  Bounding Box. If Ghostscript returns wrong values or
+  cannot process the pdf file, it sometimes helps to try
+  another version of Ghostscript.
+
+K. HISTORY
+==========
+2002/10/30 v1.0:  First release
+2002/10/30 v1.1:  Option --hires added.
+2002/11/04 v1.2:  "nul" instead of "/dev/null" for windows.
+2002/11/23 v1.3:  Use of File::Spec module's "devnull" call.
+2002/11/29 v1.4:  Option --papersize added.
+2004/06/24 v1.5:  Clear map file entries so that pdfTeX
+                  does not touch the fonts.
+2004/06/26 v1.6:  Use mgs.exe instead of gswin32c.exe for MIKTEX.
+2005/03/11 v1.7:  Support of spaces in file names
+                  (open("-|") is used for ghostscript call).
+2008/01/09 v1.8:  Fix for moving the temporary file to the output
+                  file across file system boundaries.
+2008/04/05 v1.9:  Options --resolution and --bbox added.
+2008/07/16 v1.10: Support for XeTeX added with new options
+                  --pdftex, --xetex, --xetexcmds.
+2008/07/22 v1.11: Workaround for open("-|").
+2008/07/23 v1.12: Workarounds for the workaround (error detection, ...).
+2008/07/24 v1.13: open("-|")/workaround removed.
+                  Input files with unsafe file names are linked/copied
+                  to temporary file with safe file name.
+2008/09/12 v1.14: Error detection for invalid Bounding Boxes.
+
+L. TODO
+=======
+* Description of user interface.
+* Documentation in other formats, eg. man or info pages.
+* Improved error checking.
+* Units support for option --margins.
