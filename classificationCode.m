@@ -19,6 +19,10 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
     cMat6=cell(1,folds);
     cn=unique(alabels);
     n = length(cn);
+    ord = [];
+    for xx=1:n
+        ord=[ord xx];
+    end
 
     parfor i = 1:folds
         AllTestInd = test(cv,i);
@@ -37,8 +41,8 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
         'FillCoeffs', 'off', ...
         'ClassNames', cn);
         plabel1 = predict(c1,testSet);
-        cMat1{i} =  checkDimension(confusionmat(alabels(testInd),plabel1),alabels(testInd),plabel1, n);
-
+        cMat1{i} = confusionmat(alabels(testInd),plabel1,'Order',ord);
+        
         %linear-svm
         if(n==2)
             c2 = fitcsvm(...
@@ -51,7 +55,7 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
             'Standardize', true, ...
             'ClassNames', cn);
             plabel2 = predict(c2,testSet);
-            cMat2{i} =  checkDimension(confusionmat(alabels(testInd),plabel2),alabels(testInd),plabel2, n);
+            cMat2{i} = confusionmat(alabels(testInd),plabel2,'Order',ord);
         else
             template = templateSVM(...
             'KernelFunction', 'linear', ...
@@ -66,7 +70,7 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
             'Coding', 'onevsone', ...
             'ClassNames', cn);
             plabel2 = predict(c2,testSet);
-            cMat2{i} =  checkDimension(confusionmat(alabels(testInd),plabel2),alabels(testInd),plabel2, n);
+            cMat2{i} = confusionmat(alabels(testInd),plabel2,'Order',ord);
         end
 
         %quad-svm
@@ -81,9 +85,9 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
             'Standardize', true, ...
             'ClassNames', cn);
             plabel3 = predict(c3,testSet);
-            cMat3{i} =  checkDimension(confusionmat(alabels(testInd),plabel3),alabels(testInd),plabel3, n);
+            cMat3{i} = confusionmat(alabels(testInd),plabel3,'Order',ord);
         else
-            template = templateSVM(...
+             template = templateSVM(...
             'KernelFunction', 'polynomial', ...
             'PolynomialOrder', 2, ...
             'KernelScale', 'auto', ...
@@ -95,8 +99,8 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
             'Learners', template, ...
             'Coding', 'onevsone', ...
             'ClassNames', cn);
-            plabel3 = predict(c3,testSet);
-            cMat3{i} =  checkDimension(confusionmat(alabels(testInd),plabel3),alabels(testInd),plabel3, n);
+            plabel3 = predict(c3,testSet); 
+            cMat3{i} = confusionmat(alabels(testInd),plabel3,'Order',ord);            
         end
         
         %fine-knn
@@ -110,7 +114,7 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
         'Standardize', true, ...
         'ClassNames', cn);
         plabel4 = predict(c4,testSet);
-        cMat4{i} =  checkDimension(confusionmat(alabels(testInd),plabel4),alabels(testInd),plabel4, n);
+        cMat4{i} = confusionmat(alabels(testInd),plabel4,'Order',ord); 
 
         % next 2 classifiers are used for less than 2000 sequences for time efficiency
         if(totalSeq<=2000)
@@ -125,7 +129,7 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
             'NPredToSample', subspaceDimension, ...
             'ClassNames', cn);
             plabel5 = predict(c5,testSet);
-            cMat5{i} =  checkDimension(confusionmat(alabels(testInd),plabel5),alabels(testInd),plabel5, n);
+            cMat5{i} = confusionmat(alabels(testInd),plabel5,'Order',ord); 
 
             %subspace knn
             subspaceDimension = max(1, min(74, length(trainSet) - 1));
@@ -138,7 +142,7 @@ function [ accuracy, avg_acc, clNames ] = classificationCode( disMat,alabels, fo
             'NPredToSample', subspaceDimension, ...
             'ClassNames', cn);
             plabel6 = predict(c6,testSet);
-            cMat6{i} =  checkDimension(confusionmat(alabels(testInd),plabel6),alabels(testInd),plabel6, n);
+            cMat6{i} = confusionmat(alabels(testInd),plabel6,'Order',ord); 
         end
     end
 
