@@ -63,7 +63,7 @@ can provide own dataSet.
 1) Change the dataSet at line number 12 in MainScript.m to the training dataSet name.  
 2) Run a program (MainScript.m) with common instructions.  
 3) Use newSeqClassify.m to predict label of a new sequence (3a OR 3b).   
-You need to update the *** with the accession number of a new sequence in question:  
+You need to update the *** with the accession number of a "new sequence in question":  
 a) Call newSeqClassify from command window (type following command and press enter):  
 newSeqClassify('***', mLen, disMat, lg, alabels, clusterNames)   
 b) Uncomment call to newSeqClassify.m at line number 132 in MainScript.m before running the MainScript.m.  
@@ -73,7 +73,7 @@ b) Uncomment call to newSeqClassify.m at line number 132 in MainScript.m before 
 MainScript.m : main script that calls other modules.  
 readFasta.m : function used to read .fasta files from local machine.  
 downloadFasta.m : function to download .fasta files from NCBI database using given accesion numbers.  
-lengthCalc.m : function to calculate length stats (maax/min/mean/median length among given sequences).  
+lengthCalc.m : function to calculate length stats (max/min/mean/median length among given sequences).  
 
 numMappingAT_CG.m : function for paired numeric representation.  
 numMappingAtomic.m : function for atomic representation.  
@@ -92,8 +92,7 @@ numMappingRandom13.m : function for random representation (among all 13 represen
 numMappingReal.m : function for real representation.  
 
 myupdatefcn.m : function to display information about a selected point in 3D plot.  
-classifictionCode.m : function to perform supervised machine learning classification on given dataset. It produces classification accuracy for all 6 classifiers (4 for more than 2000 sequences) used in the study.  
-checkDimension.m : function to check dimension of confusion matrix. MATLAB removes zero rows and cols by default from confusion matrix. This function reintroduce zero rows/cols in such cases to keep the size of confusion matrix n x n for given n clusters.  
+classifictionCode.m : function to perform supervised machine learning classification on given dataset. It produces classification accuracy for all 6 classifiers (4 for more than 2000 sequences) used in the study.    
 newSeqClassify.m : function to classify a new sequence.  
 
 distinguishable_colors.m : function to pick n maximally distinct colors for n clusters. This function is written by Tim Holy and is downloaded from the following link:  
@@ -110,12 +109,14 @@ Jones, D. L. 2015. Fathom Toolbox for Matlab: software for multivariate ecologic
 DomainToKingdom(Eukaryota), FamilyToGenus(Cyprinnidae), Fungi, Influenza, Insects, KingdomToPhylum(Animalia),
 Mammalia, Mammals, OrderToFamily(Cypriniformes), PhylumToSubphylum(Chordata), Plants, Primates, Protists, 
 SubclassToSuperorder(Neopterygii), SubfamilyToGenus(Acheilognathinae), SubphylumToClass(Vertebrata),
-SuperorderToOrder(Ostariophysi), Vertebrates  
+SuperorderToOrder(Ostariophysi), Vertebrates , BacteriaTest, NewVertSequences
+
+
 
 NOTE:   
-To reproduce exact results(classification accuracies) from the paper, user should use default MATLAB ClassificationLearner application (Statistics and machine Learning Toolbox) instead of implemented classifictionCode.m  
-The implemented code will produce similar, but not identical results. Built-in application is slightly faster and easier to use for new user.   
-Import variable "ATestlg" to this built-in application and select last column as response, make numberOfFolds 10 and train the classifiers to get classification accuracies (or to reproduce results).  
-https://www.mathworks.com/help/stats/classification-learner-app.html  
-To compute distance matrix only(faster processing), code for classification and 3d MDS plot can be commented out.  
+* BacteriaTest is a new addition to the dataSets that is used to classify bacterial genomes
+* NewVertSequences is a collection of 694 newly added vertebrate sequences to the NCBI database till Jan, 2019.
+* newVertSeqPredictionResults.xlsx contains accession numbers, actual labels and predicted labels of aforementioned 694 new vertebrate sequences. In order to predict the labels of these new sequences, user can run the main program using "Vertebrates" dataset and then test the individual accession numbers. Please refer "New Sequence Classification" section for more details.
+* To compute distance matrix only(faster processing), code for classification and 3d MDS plot can be commented out. 
+* Sequences can also be downloaded directly from the NCBI website link "ftp://ftp.ncbi.nlm.nih.gov/refseq/". 
 
